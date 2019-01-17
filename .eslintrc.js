@@ -3,5 +3,6 @@ module.exports = {
     "plugins": ["jest"],
     "rules": {
       "class-methods-use-this": "off",
+      "import/prefer-default-export": "off",
     }
 };
