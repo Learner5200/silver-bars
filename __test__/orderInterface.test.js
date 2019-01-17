@@ -1,4 +1,5 @@
 import OrderInterface from '../src/orderInterface';
+import { buildOrderParams } from './helpers';
 
 describe('OrderInterface', () => {
   let orderInterface;
@@ -14,7 +15,7 @@ describe('OrderInterface', () => {
       return 'output';
     }
   }
-  let buyParams;
+  let params;
 
   beforeEach(() => {
     orderInterface = new OrderInterface({
@@ -22,11 +23,7 @@ describe('OrderInterface', () => {
       OrderBoardViewClass: MockOrderBoardView,
     });
     ({ orderBoard, orderBoardView } = orderInterface);
-    buyParams = {
-      quantity: 1,
-      price: 100,
-      userID: 'user1',
-    };
+    params = buildOrderParams({});
   });
 
   describe('properties', () => {
@@ -40,13 +37,13 @@ describe('OrderInterface', () => {
 
   describe('.buy()', () => {
     it('registers a new order on order board of type "BUY"', () => {
-      const registerParams = Object.assign(buyParams, { type: 'BUY' });
+      const registerParams = Object.assign(params, { type: 'BUY' });
       const registerSpy = jest.spyOn(orderBoard, 'register');
-      orderInterface.buy(buyParams);
+      orderInterface.buy(params);
       expect(registerSpy).toHaveBeenCalledWith(registerParams);
     });
     it('returns the return value of OrderBoard.register() as order ID', () => {
-      const id = orderInterface.buy(buyParams);
+      const id = orderInterface.buy(params);
       expect(id).toBe(1);
     });
   });
