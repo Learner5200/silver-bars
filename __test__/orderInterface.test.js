@@ -4,10 +4,12 @@ describe('OrderInterface', () => {
   let orderInterface;
   let mockOrderBoard;
   beforeEach(() => {
-    orderInterface = new OrderInterface();
     mockOrderBoard = {
       register() {},
     };
+    orderInterface = new OrderInterface({
+      orderBoard: mockOrderBoard,
+    });
   });
   describe('when buying silver bars', () => {
     it('registers a new order on order board of type "BUY"', () => {
