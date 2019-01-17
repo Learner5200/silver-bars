@@ -4,7 +4,7 @@ export default class OrderInterface {
   }
 
   buy({ quantity, price, userID }) {
-    this.orderBoard.register({
+    return this.orderBoard.register({
       quantity,
       price,
       userID,
