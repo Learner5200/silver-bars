@@ -2,28 +2,47 @@ import OrderInterface from '../src/orderInterface';
 
 describe('OrderInterface', () => {
   let orderInterface;
-  let mockOrderBoard;
+  let orderBoard;
+  let orderBoardView;
+  class MockOrderBoard {
+    register() {
+      return 1;
+    }
+  }
+  class MockOrderBoardView {
+    render() {
+      return 'output';
+    }
+  }
   let buyParams;
+
   beforeEach(() => {
-    mockOrderBoard = {
-      register: () => 1,
-      view: {
-        render: () => 'output',
-      },
-    };
     orderInterface = new OrderInterface({
-      orderBoard: mockOrderBoard,
+      OrderBoardClass: MockOrderBoard,
+      OrderBoardViewClass: MockOrderBoardView,
     });
+    orderBoard = orderInterface.orderBoard;
+    orderBoardView = orderInterface.orderBoardView;
     buyParams = {
       quantity: 1,
       price: 100,
       userID: 'user1',
     };
   });
+
+  describe('properties', () => {
+    it('initializes with an instance of OrderBoardClass', () => {
+      expect(orderBoard).toBeInstanceOf(MockOrderBoard);
+    });
+    it('initializes with an instance of OrderBoardViewClass', () => {
+      expect(orderBoardView).toBeInstanceOf(MockOrderBoardView);
+    });
+  });
+
   describe('.buy()', () => {
     it('registers a new order on order board of type "BUY"', () => {
       const registerParams = Object.assign(buyParams, { type: 'BUY' });
-      const registerSpy = jest.spyOn(mockOrderBoard, 'register');
+      const registerSpy = jest.spyOn(orderBoard, 'register');
       orderInterface.buy(buyParams);
       expect(registerSpy).toHaveBeenCalledWith(registerParams);
     });
@@ -32,11 +51,13 @@ describe('OrderInterface', () => {
       expect(id).toBe(1);
     });
   });
+
   describe('.display()', () => {
-    it('logs the output of OrderBoard.view.render() to the console', () => {
+    it('asks orderBoardView to render orderBoard and logs the output to the console', () => {
       const consoleSpy = jest.spyOn(console, 'log');
+      const output = orderBoardView.render(orderBoard);
       orderInterface.display();
-      expect(consoleSpy).toHaveBeenCalledWith('output');
+      expect(consoleSpy).toHaveBeenCalledWith(output);
     });
   });
 });
