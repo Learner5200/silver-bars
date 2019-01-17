@@ -6,8 +6,9 @@ describe('OrderInterface', () => {
   let buyParams;
   beforeEach(() => {
     mockOrderBoard = {
-      register() {
-        return 1;
+      register: () => 1,
+      view: {
+        render: () => 'output',
       },
     };
     orderInterface = new OrderInterface({
@@ -19,7 +20,7 @@ describe('OrderInterface', () => {
       userID: 'user1',
     };
   });
-  describe('when buying silver bars', () => {
+  describe('.buy()', () => {
     it('registers a new order on order board of type "BUY"', () => {
       const registerParams = Object.assign(buyParams, { type: 'BUY' });
       const registerSpy = jest.spyOn(mockOrderBoard, 'register');
@@ -29,6 +30,13 @@ describe('OrderInterface', () => {
     it('returns the return value of OrderBoard.register() as order ID', () => {
       const id = orderInterface.buy(buyParams);
       expect(id).toBe(1);
+    });
+  });
+  describe('.display()', () => {
+    it('logs the output of OrderBoard.view.render() to the console', () => {
+      const consoleSpy = jest.spyOn(console, 'log');
+      orderInterface.display();
+      expect(consoleSpy).toHaveBeenCalledWith('output');
     });
   });
 });
