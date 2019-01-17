@@ -1,6 +1,7 @@
 export default class OrderInterface {
-  constructor({ orderBoard }) {
-    this.orderBoard = orderBoard;
+  constructor({ OrderBoardClass, OrderBoardViewClass }) {
+    this.orderBoard = new OrderBoardClass();
+    this.orderBoardView = new OrderBoardViewClass();
   }
 
   buy({ quantity, price, userID }) {
@@ -13,6 +14,6 @@ export default class OrderInterface {
   }
 
   display() {
-    console.log(this.orderBoard.view.render());
+    console.log(this.orderBoardView.render(this.orderBoard));
   }
 }
