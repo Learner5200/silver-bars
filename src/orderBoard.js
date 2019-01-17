@@ -1,5 +1,7 @@
+import Order from './order';
+
 export default class OrderBoard {
-  constructor({ OrderClass }) {
+  constructor({ OrderClass = Order } = {}) {
     this.OrderClass = OrderClass;
     this.orders = [];
     this.nextOrderID = 0;
