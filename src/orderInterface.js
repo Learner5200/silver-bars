@@ -1,5 +1,7 @@
+import OrderBoard from './orderBoard';
+
 export default class OrderInterface {
-  constructor({ OrderBoardClass, OrderBoardViewClass }) {
+  constructor({ OrderBoardClass = OrderBoard, OrderBoardViewClass }) {
     this.orderBoard = new OrderBoardClass();
     this.orderBoardView = new OrderBoardViewClass();
   }
