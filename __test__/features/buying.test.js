@@ -1,3 +1,5 @@
+import OrderInterface from '../../src/orderInterface';
+
 describe('Buying', () => {
   let orderInterface;
   beforeEach(() => {
