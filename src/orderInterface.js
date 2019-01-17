@@ -11,4 +11,8 @@ export default class OrderInterface {
       type: 'BUY',
     });
   }
+
+  display() {
+    console.log(this.orderBoard.view.render());
+  }
 }
