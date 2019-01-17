@@ -21,8 +21,7 @@ describe('OrderInterface', () => {
       OrderBoardClass: MockOrderBoard,
       OrderBoardViewClass: MockOrderBoardView,
     });
-    orderBoard = orderInterface.orderBoard;
-    orderBoardView = orderInterface.orderBoardView;
+    ({ orderBoard, orderBoardView } = orderInterface);
     buyParams = {
       quantity: 1,
       price: 100,
