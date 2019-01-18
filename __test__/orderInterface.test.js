@@ -37,7 +37,12 @@ describe('OrderInterface', () => {
 
   describe('.buy()', () => {
     it('registers a new order on order board of type "BUY"', () => {
-      const registerParams = Object.assign(params, { type: 'BUY' });
+      const registerParams = {
+        price: 100,
+        quantity: 1,
+        userID: 'user1',
+        type: 'BUY',
+      };
       const registerSpy = jest.spyOn(orderBoard, 'register');
       orderInterface.buy(params);
       expect(registerSpy).toHaveBeenCalledWith(registerParams);
