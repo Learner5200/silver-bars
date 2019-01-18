@@ -6,12 +6,16 @@ export default class OrderBoardView {
   }
 
   render(orderBoard) {
-    const titleView = 'LIVE ORDER BOARD\n\n';
+    let view = 'LIVE ORDER BOARD\n\n';
     const buySummary = this.summariser.summarise({ orderBoard, type: 'BUY' });
     const sellSummary = this.summariser.summarise({ orderBoard, type: 'SELL' });
-    const buyView = this.summaryView({ summary: buySummary, type: 'BUY' });
-    const sellView = this.summaryView({ summary: sellSummary, type: 'SELL' });
-    return titleView + buyView + sellView;
+    if (buySummary.length > 0) {
+      view += this.summaryView({ summary: buySummary, type: 'BUY' });
+    }
+    if (sellSummary.length > 0) {
+      view += this.summaryView({ summary: sellSummary, type: 'SELL' });
+    }
+    return view;
   }
 
   summaryView({
