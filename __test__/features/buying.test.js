@@ -25,4 +25,19 @@ describe('Buying', () => {
     orderInterface.display();
     expect(spy).toHaveBeenCalledWith('LIVE ORDER BOARD\n\nSELL:\n\n3.5kg for £303\n\n');
   });
+  test('user can both buy and sell silver bars and see them in separate places on the display', () => {
+    orderInterface.buy({
+      quantity: 3.5,
+      price: 303,
+      userID: 'user1',
+    });
+    orderInterface.sell({
+      quantity: 4.5,
+      price: 403,
+      userID: 'user1',
+    });
+    const spy = jest.spyOn(console, 'log');
+    orderInterface.display();
+    expect(spy).toHaveBeenCalledWith('LIVE ORDER BOARD\n\nBUY:\n\n3.5kg for £303\n\nSELL:\n\n4.5kg for £403\n\n');
+  });
 });
