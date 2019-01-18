@@ -2,28 +2,36 @@ export default class OrderBoardView {
   render(orderBoard) {
     const titleView = 'LIVE ORDER BOARD\n\n';
     const orderList = orderBoard.getOrders();
-    const buyView = this.orderListView({ orderList, type: 'BUY' });
-    const sellView = this.orderListView({ orderList, type: 'SELL' });
+    const buySummary = this.summary({ orderList, type: 'BUY' });
+    const sellSummary = this.summary({ orderList, type: 'SELL' });
+    const buyView = this.summaryView({ summary: buySummary, type: 'BUY' });
+    const sellView = this.summaryView({ summary: sellSummary, type: 'SELL' });
     return titleView + buyView + sellView;
   }
 
-  orderListView({
+  summary({
     orderList,
     type,
   }) {
-    let orderListView = `${type}:\n\n`;
-    const filteredList = this.filter({ orderList, type });
-    if (filteredList.length === 0) return '';
+    const filteredOrders = this.filter({ orderList, type });
+    const aggregatedOrders = this.aggregateByPrice(filteredOrders);
+    return aggregatedOrders;
+  }
 
-    const summary = this.summarise(filteredList);
+  summaryView({
+    summary,
+    type,
+  }) {
+    const summaryHeader = `${type}:\n\n`;
     const prices = Object.keys(summary);
     if (type === 'BUY') prices.reverse();
+    const summaryBody = prices.map(price => this.orderView(price, summary))
+      .join('');
+    return summaryHeader + summaryBody;
+  }
 
-    prices.forEach((price) => {
-      orderListView += `${summary[price]}kg for £${price}\n`;
-    });
-    orderListView += '\n';
-    return orderListView;
+  orderView(price, orderList) {
+    return `${orderList[price]}kg for £${price}\n`;
   }
 
   filter({
@@ -33,7 +41,7 @@ export default class OrderBoardView {
     return orderList.filter(order => order.type === type);
   }
 
-  summarise(orders) {
+  aggregateByPrice(orders) {
     const reducer = (summary, order) => {
       const newSummary = summary;
       newSummary[order.price] = newSummary[order.price] + order.quantity || order.quantity;
