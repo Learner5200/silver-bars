@@ -45,4 +45,14 @@ describe('OrderBoard', () => {
       expect(returnedID).toEqual(secondOrder.ID);
     });
   });
+
+  describe('.delete()', () => {
+    it('deletes the order with the specified ID', () => {
+      orderBoard.register(buyParams);
+      orderBoard.register(sellParams);
+      orderBoard.delete({ orderID: 1 });
+      expect(orderBoard.getOrders().length).toBe(1);
+      expect(orderBoard.getOrders()[0].type).toBe('SELL');
+    });
+  });
 });

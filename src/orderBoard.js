@@ -18,4 +18,8 @@ export default class OrderBoard {
     this.orders.push(order);
     return order.ID;
   }
+
+  delete({ orderID }) {
+    this.orders = this.orders.filter(order => order.ID !== orderID);
+  }
 }
