@@ -3,7 +3,7 @@ import AggregateOrder from './aggregateOrder';
 export default class OrderBoardSummariser {
   constructor({
     AggregateOrderClass = AggregateOrder,
-  }) {
+  } = {}) {
     this.AggregateOrderClass = AggregateOrderClass;
   }
 
