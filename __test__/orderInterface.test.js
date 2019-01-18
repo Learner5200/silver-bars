@@ -9,6 +9,9 @@ describe('OrderInterface', () => {
     register() {
       return 1;
     }
+
+    delete() {
+    }
   }
   class MockOrderBoardView {
     render() {
@@ -70,6 +73,12 @@ describe('OrderInterface', () => {
       const id = orderInterface.sell(sellParams);
       expect(id).toBe(1);
     });
+  });
+
+  describe('.cancel()', () => {
+    const deleteSpy = jest.spyOn(orderBoard, 'delete');
+    orderInterface.cancel(1);
+    expect(deleteSpy).toHaveBeenCalledWith(1);
   });
 
   describe('.display()', () => {
