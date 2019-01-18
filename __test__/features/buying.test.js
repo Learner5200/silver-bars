@@ -41,4 +41,12 @@ describe('Buying', () => {
     orderInterface.display();
     expect(spy).toHaveBeenCalledWith('LIVE ORDER BOARD\n\nBUY:\n\n1kg for £100\n\nSELL:\n\n1kg for £200\n\n');
   });
+  test('user can cancel order and not see it on display', () => {
+    orderInterface.buy(buildOrderParams());
+    orderInterface.buy(buildOrderParams({ quantity: 2, price: 200 }));
+    orderInterface.cancel({ orderID: 1 });
+    const spy = jest.spyOn(console, 'log');
+    orderInterface.display();
+    expect(spy).toHaveBeenCalledWith('LIVE ORDER BOARD\n\nBUY:\n\n2kg for £200\n\n');
+  });
 });
