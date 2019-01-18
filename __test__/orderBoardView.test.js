@@ -21,7 +21,7 @@ describe('OrderBoardView', () => {
   describe('.render()', () => {
     it('renders BUY orders in descending price order', () => {
       const output = orderBoardView.render(fakeOrderBoard);
-      expect(output).toBe('LIVE ORDER BOARD\n\nBUY:\n\n1kg for £200\n1kg for £300\n\nSELL:');
+      expect(output).toBe('LIVE ORDER BOARD\n\nBUY:\n\n1kg for £300\n1kg for £200\n\n');
     });
   });
 });
