@@ -13,6 +13,6 @@ describe('Buying', () => {
     });
     const spy = jest.spyOn(console, 'log');
     orderInterface.display();
-    expect(spy).toHaveBeenCalledWith('LIVE ORDER BOARD\n\nBUY:\n\n3.5kg for £303\n\nSELL:');
+    expect(spy).toHaveBeenCalledWith('LIVE ORDER BOARD\n\nBUY:\n\n3.5kg for £303\n\n');
   });
 });
