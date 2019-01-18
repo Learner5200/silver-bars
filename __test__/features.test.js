@@ -1,7 +1,7 @@
-import OrderInterface from '../../src/orderInterface';
-import { buildOrderParams } from '../helpers';
+import OrderInterface from '../src/orderInterface';
+import { buildOrderParams } from './helpers';
 
-describe('Buying', () => {
+describe('Features', () => {
   let orderInterface;
   beforeEach(() => {
     orderInterface = new OrderInterface();
