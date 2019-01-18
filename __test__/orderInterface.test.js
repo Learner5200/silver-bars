@@ -15,7 +15,8 @@ describe('OrderInterface', () => {
       return 'output';
     }
   }
-  let params;
+  let buyParams;
+  let sellParams;
 
   beforeEach(() => {
     orderInterface = new OrderInterface({
@@ -23,7 +24,8 @@ describe('OrderInterface', () => {
       OrderBoardViewClass: MockOrderBoardView,
     });
     ({ orderBoard, orderBoardView } = orderInterface);
-    params = buildOrderParams({});
+    buyParams = buildOrderParams({});
+    sellParams = buildOrderParams({ type: 'SELL' });
   });
 
   describe('properties', () => {
@@ -44,11 +46,28 @@ describe('OrderInterface', () => {
         type: 'BUY',
       };
       const registerSpy = jest.spyOn(orderBoard, 'register');
-      orderInterface.buy(params);
+      orderInterface.buy(buyParams);
       expect(registerSpy).toHaveBeenCalledWith(registerParams);
     });
     it('returns the return value of OrderBoard.register() as order ID', () => {
-      const id = orderInterface.buy(params);
+      const id = orderInterface.buy(buyParams);
+      expect(id).toBe(1);
+    });
+  });
+  describe('.sell()', () => {
+    it('registers a new order on order board of type "SELL"', () => {
+      const registerParams = {
+        price: 100,
+        quantity: 1,
+        userID: 'user1',
+        type: 'SELL',
+      };
+      const registerSpy = jest.spyOn(orderBoard, 'register');
+      orderInterface.sell(sellParams);
+      expect(registerSpy).toHaveBeenCalledWith(registerParams);
+    });
+    it('returns the return value of OrderBoard.register() as order ID', () => {
+      const id = orderInterface.sell(sellParams);
       expect(id).toBe(1);
     });
   });

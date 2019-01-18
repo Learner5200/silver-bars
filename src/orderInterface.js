@@ -16,6 +16,15 @@ export default class OrderInterface {
     });
   }
 
+  sell({ quantity, price, userID }) {
+    return this.orderBoard.register({
+      quantity,
+      price,
+      userID,
+      type: 'SELL',
+    });
+  }
+
   display() {
     console.log(this.orderBoardView.render(this.orderBoard));
   }
