@@ -35,9 +35,9 @@ describe('OrderBoardView', () => {
         type: 'BUY',
       });
     });
-    it('renders outputs of summariser.summarise() in two lists ', () => {
-      // const output = orderBoardView.render(fakeOrderBoard);
-      // expect(output).toBe('LIVE ORDER BOARD\n\nBUY:\n\n1kg for £300\n1kg for £200\n\n');
+    it('formats outputs of summariser.summarise() in two lists ', () => {
+      const output = orderBoardView.render(fakeOrderBoard);
+      expect(output).toBe('LIVE ORDER BOARD\n\nBUY:\n\n2kg for £2\n1kg for £1\n\nSELL:\n\n10kg for £10\n20kg for £20\n\n');
     });
   });
 });

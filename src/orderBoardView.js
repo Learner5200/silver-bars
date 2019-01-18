@@ -7,7 +7,6 @@ export default class OrderBoardView {
 
   render(orderBoard) {
     const titleView = 'LIVE ORDER BOARD\n\n';
-    console.log(this.summariser)
     const buySummary = this.summariser.summarise({ orderBoard, type: 'BUY' });
     const sellSummary = this.summariser.summarise({ orderBoard, type: 'SELL' });
     const buyView = this.summaryView({ summary: buySummary, type: 'BUY' });
@@ -22,7 +21,7 @@ export default class OrderBoardView {
     const summaryHeader = `${type}:\n\n`;
     const summaryBody = summary.map(order => this.orderView(order))
       .join('');
-    return summaryHeader + summaryBody;
+    return summaryHeader + summaryBody + '\n';
   }
 
   orderView(order) {
