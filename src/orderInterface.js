@@ -25,6 +25,10 @@ export default class OrderInterface {
     });
   }
 
+  cancel({ orderID }) {
+    this.orderBoard.delete({ orderID });
+  }
+
   display() {
     console.log(this.orderBoardView.render(this.orderBoard));
   }

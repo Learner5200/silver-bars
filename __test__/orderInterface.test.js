@@ -76,9 +76,11 @@ describe('OrderInterface', () => {
   });
 
   describe('.cancel()', () => {
-    const deleteSpy = jest.spyOn(orderBoard, 'delete');
-    orderInterface.cancel(1);
-    expect(deleteSpy).toHaveBeenCalledWith(1);
+    it('asks the orderBoard to delete the order', () => {
+      const deleteSpy = jest.spyOn(orderBoard, 'delete');
+      orderInterface.cancel({ orderID: 1 });
+      expect(deleteSpy).toHaveBeenCalledWith({ orderID: 1 });
+    });
   });
 
   describe('.display()', () => {
