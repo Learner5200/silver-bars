@@ -2,8 +2,8 @@ import AggregateOrder from '../src/aggregateOrder';
 import { buildOrderParams } from './helpers';
 
 describe('aggregatedOrdersOrder', () => {
-  let order;
   let params;
+  let order;
   beforeEach(() => {
     params = buildOrderParams({
       price: 200,

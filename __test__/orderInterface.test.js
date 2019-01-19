@@ -1,10 +1,7 @@
 import OrderInterface from '../src/orderInterface';
-import { buildOrderParams } from './helpers';
+import { buildOrderParams, expectConsoleOutput } from './helpers';
 
 describe('OrderInterface', () => {
-  let orderInterface;
-  let orderBoard;
-  let orderBoardView;
   class MockOrderBoard {
     register() {
       return 1;
@@ -17,6 +14,9 @@ describe('OrderInterface', () => {
       return 'output';
     }
   }
+  let orderInterface;
+  let orderBoard;
+  let orderBoardView;
   let buyParams;
   let sellParams;
 
@@ -41,15 +41,14 @@ describe('OrderInterface', () => {
 
   describe('.buy()', () => {
     it('registers a new order on order board of type "BUY"', () => {
-      const registerParams = {
+      const registerSpy = jest.spyOn(orderBoard, 'register');
+      orderInterface.buy(buyParams);
+      expect(registerSpy).toHaveBeenCalledWith({
         price: 100,
         quantity: 1,
         userID: 'user1',
         type: 'BUY',
-      };
-      const registerSpy = jest.spyOn(orderBoard, 'register');
-      orderInterface.buy(buyParams);
-      expect(registerSpy).toHaveBeenCalledWith(registerParams);
+      });
     });
     it('returns the return value of OrderBoard.register() as order ID', () => {
       const id = orderInterface.buy(buyParams);
@@ -58,15 +57,14 @@ describe('OrderInterface', () => {
   });
   describe('.sell()', () => {
     it('registers a new order on order board of type "SELL"', () => {
-      const registerParams = {
+      const registerSpy = jest.spyOn(orderBoard, 'register');
+      orderInterface.sell(sellParams);
+      expect(registerSpy).toHaveBeenCalledWith({
         price: 100,
         quantity: 1,
         userID: 'user1',
         type: 'SELL',
-      };
-      const registerSpy = jest.spyOn(orderBoard, 'register');
-      orderInterface.sell(sellParams);
-      expect(registerSpy).toHaveBeenCalledWith(registerParams);
+      });
     });
     it('returns the return value of OrderBoard.register() as order ID', () => {
       const id = orderInterface.sell(sellParams);
@@ -84,10 +82,10 @@ describe('OrderInterface', () => {
 
   describe('.display()', () => {
     it('asks orderBoardView to render orderBoard and logs the output to the console', () => {
-      const consoleSpy = jest.spyOn(console, 'log');
-      const output = orderBoardView.render(orderBoard);
-      orderInterface.display();
-      expect(consoleSpy).toHaveBeenCalledWith(output);
+      expectConsoleOutput({
+        func: (() => orderInterface.display()),
+        output: orderBoardView.render(orderBoard),
+      });
     });
   });
 });

@@ -2,15 +2,15 @@ import OrderBoardSummariser from '../src/orderBoardSummariser';
 import { buildOrderParams } from './helpers';
 
 describe('OrderBoardSummariser', () => {
-  let summariser;
-  let fakeOrderBoard;
-  let summary;
   class MockAggregateOrder {
     constructor({ quantity, price }) {
       this.quantity = quantity;
       this.price = price;
     }
   }
+  let summariser;
+  let fakeOrderBoard;
+  let summary;
 
   beforeEach(() => {
     fakeOrderBoard = {
@@ -24,7 +24,7 @@ describe('OrderBoardSummariser', () => {
           price: 100,
         }),
         buildOrderParams({
-          quantity: 1,
+          quantity: 2,
           price: 200,
         }),
         buildOrderParams({
