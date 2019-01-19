@@ -8,6 +8,7 @@ export default class OrderBoardSummariser {
   summarise({ orderBoard, type }) {
     const orderList = orderBoard.getOrders();
     const filteredOrders = this.filter({ orderList, type });
+    if (filteredOrders.length === 0) return [];
     const aggregateOrders = this.aggregateOrderList(filteredOrders);
     if (type === 'BUY') aggregateOrders.reverse();
     return aggregateOrders;
