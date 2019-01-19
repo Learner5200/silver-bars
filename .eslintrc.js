@@ -5,5 +5,6 @@ module.exports = {
       "class-methods-use-this": "off",
       "import/prefer-default-export": "off",
       "prefer-template": "off",
+      "object-curly-newline": "off",
     }
 };
