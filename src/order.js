@@ -1,11 +1,5 @@
 export default class Order {
-  constructor({
-    quantity,
-    price,
-    userID,
-    type,
-    ID,
-  }) {
+  constructor({ quantity, price, userID, type, ID }) {
     this.quantity = quantity;
     this.price = price;
     this.userID = userID;

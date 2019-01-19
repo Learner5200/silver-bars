@@ -12,9 +12,7 @@ describe('OrderBoard', () => {
   }
 
   beforeEach(() => {
-    orderBoard = new OrderBoard({
-      OrderClass: MockOrder,
-    });
+    orderBoard = new OrderBoard({ Order: MockOrder });
     buyParams = buildOrderParams({ type: 'BUY' });
     sellParams = buildOrderParams({ type: 'SELL' });
   });

@@ -1,10 +1,13 @@
-import OrderBoard from './orderBoard';
-import OrderBoardView from './orderBoardView';
+import OrderBoardClass from './orderBoard';
+import OrderBoardViewClass from './orderBoardView';
 
 export default class OrderInterface {
-  constructor({ OrderBoardClass = OrderBoard, OrderBoardViewClass = OrderBoardView } = {}) {
-    this.orderBoard = new OrderBoardClass();
-    this.orderBoardView = new OrderBoardViewClass();
+  constructor({
+    OrderBoard = OrderBoardClass,
+    OrderBoardView = OrderBoardViewClass,
+  } = {}) {
+    this.orderBoard = new OrderBoard();
+    this.orderBoardView = new OrderBoardView();
   }
 
   buy({ quantity, price, userID }) {

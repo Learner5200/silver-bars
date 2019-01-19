@@ -1,10 +1,10 @@
-import Order from './order';
+import OrderClass from './order';
 
 export default class OrderBoard {
-  constructor({ OrderClass = Order } = {}) {
-    this.OrderClass = OrderClass;
+  constructor({ Order = OrderClass } = {}) {
+    this.Order = Order;
     this.orders = [];
-    this.nextOrderID = 0;
+    this.currentOrderID = 0;
   }
 
   getOrders() {
@@ -12,14 +12,18 @@ export default class OrderBoard {
   }
 
   register(params) {
-    this.nextOrderID += 1;
-    const orderParams = Object.assign(params, { ID: this.nextOrderID });
-    const order = new this.OrderClass(orderParams);
+    const orderParams = Object.assign(params, { ID: this.nextOrderID() });
+    const order = new this.Order(orderParams);
     this.orders.push(order);
     return order.ID;
   }
 
   delete({ orderID }) {
     this.orders = this.orders.filter(order => order.ID !== orderID);
+  }
+
+  nextOrderID() {
+    this.currentOrderID += 1;
+    return this.currentOrderID;
   }
 }

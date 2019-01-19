@@ -1,10 +1,8 @@
-import AggregateOrder from './aggregateOrder';
+import AggregateOrderClass from './aggregateOrder';
 
 export default class OrderBoardSummariser {
-  constructor({
-    AggregateOrderClass = AggregateOrder,
-  } = {}) {
-    this.AggregateOrderClass = AggregateOrderClass;
+  constructor({ AggregateOrder = AggregateOrderClass } = {}) {
+    this.AggregateOrder = AggregateOrder;
   }
 
   summarise({
@@ -28,7 +26,7 @@ export default class OrderBoardSummariser {
   aggregateOrderList(orders) {
     const groupedOrders = this.groupByPrice(orders);
     const prices = Object.keys(groupedOrders);
-    return prices.map(price => new this.AggregateOrderClass({
+    return prices.map(price => new this.AggregateOrder({
       price: Number(price),
       quantity: groupedOrders[price],
     }));

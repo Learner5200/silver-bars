@@ -1,8 +1,8 @@
-import OrderBoardSummariser from './orderBoardSummariser';
+import SummariserClass from './orderBoardSummariser';
 
 export default class OrderBoardView {
-  constructor({ SummariserClass = OrderBoardSummariser } = {}) {
-    this.summariser = new SummariserClass();
+  constructor({ Summariser = SummariserClass } = {}) {
+    this.summariser = new Summariser();
   }
 
   render(orderBoard) {

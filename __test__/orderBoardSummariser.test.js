@@ -6,10 +6,7 @@ describe('OrderBoardSummariser', () => {
   let fakeOrderBoard;
   let summary;
   class MockAggregateOrder {
-    constructor({
-      quantity,
-      price,
-    }) {
+    constructor({ quantity, price }) {
       this.quantity = quantity;
       this.price = price;
     }
@@ -47,9 +44,7 @@ describe('OrderBoardSummariser', () => {
         }),
       ],
     };
-    summariser = new OrderBoardSummariser({
-      AggregateOrderClass: MockAggregateOrder,
-    });
+    summariser = new OrderBoardSummariser({ AggregateOrder: MockAggregateOrder });
     summary = summariser.summarise({
       orderBoard: fakeOrderBoard,
       type: 'BUY',

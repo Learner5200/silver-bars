@@ -10,8 +10,7 @@ describe('OrderInterface', () => {
       return 1;
     }
 
-    delete() {
-    }
+    delete() {}
   }
   class MockOrderBoardView {
     render() {
@@ -23,8 +22,8 @@ describe('OrderInterface', () => {
 
   beforeEach(() => {
     orderInterface = new OrderInterface({
-      OrderBoardClass: MockOrderBoard,
-      OrderBoardViewClass: MockOrderBoardView,
+      OrderBoard: MockOrderBoard,
+      OrderBoardView: MockOrderBoardView,
     });
     ({ orderBoard, orderBoardView } = orderInterface);
     buyParams = buildOrderParams({});

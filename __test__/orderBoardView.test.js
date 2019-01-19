@@ -24,7 +24,7 @@ describe('OrderBoardView', () => {
         }),
       ],
     };
-    orderBoardView = new OrderBoardView({ SummariserClass: FakeSummariser });
+    orderBoardView = new OrderBoardView({ Summariser: FakeSummariser });
   });
 
   describe('.render()', () => {
