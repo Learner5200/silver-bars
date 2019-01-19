@@ -18,10 +18,7 @@ export default class OrderBoardView {
     return view;
   }
 
-  summaryView({
-    summary,
-    type,
-  }) {
+  summaryView({ summary, type }) {
     const summaryHeader = `${type}:\n\n`;
     const summaryBody = summary.map(order => this.orderView(order))
       .join('');

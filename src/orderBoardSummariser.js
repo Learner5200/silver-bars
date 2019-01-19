@@ -5,10 +5,7 @@ export default class OrderBoardSummariser {
     this.AggregateOrder = AggregateOrder;
   }
 
-  summarise({
-    orderBoard,
-    type,
-  }) {
+  summarise({ orderBoard, type }) {
     const orderList = orderBoard.getOrders();
     const filteredOrders = this.filter({ orderList, type });
     const aggregateOrders = this.aggregateOrderList(filteredOrders);
@@ -16,10 +13,7 @@ export default class OrderBoardSummariser {
     return aggregateOrders;
   }
 
-  filter({
-    orderList,
-    type,
-  }) {
+  filter({ orderList, type }) {
     return orderList.filter(order => order.type === type);
   }
 
