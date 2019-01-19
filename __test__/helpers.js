@@ -13,3 +13,9 @@ export function buildOrderParams({
     ID,
   };
 }
+
+export function expectConsoleOutput({ func, output }) {
+  const spy = jest.spyOn(console, 'log');
+  func();
+  expect(spy).toHaveBeenCalledWith(output);
+}
